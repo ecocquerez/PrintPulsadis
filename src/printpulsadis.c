@@ -23,6 +23,9 @@ int OpenSharedMem(void);
 
 int main(int argc, char * argv[])
 {
+	char szOPtTarif[15];
+	char szPeriodeTarifaire[30];
+	char szDemain[15];
 	int mem;
 	mem = OpenSharedMem();
 	if(mem < 0)
@@ -30,96 +33,87 @@ int main(int argc, char * argv[])
 		printf("Error while reading Shared memory");
 		return 1;
 	}
-	printf("compteur : %s\n",pPulsadis->Adco);
-	printf("Option tarifaire : ");
 	switch(pPulsadis->OptTarifaire)
 	{
 	case Base:
-		printf("Base\n");
+		strcpy(szOPtTarif,"Base");
 		break;
 	case Creuse:
-		printf("Heure Creuse\n");
+		strcpy(szOPtTarif,"Heure Creuse");
 		break;
 	case Ejp:
-		printf("EJP\n");
+		strcpy(szOPtTarif,"EJP");
 		break;
 	case Tempo:
-		printf("Tempo\n");
+		strcpy(szOPtTarif,"Tempo");
 		break;
+	default:
+		strcpy(szOPtTarif,"Inconnu");
 	}
-	printf("Puissance souscrite : %d\n",pPulsadis->IntensiteSouscrite);
-	printf("Index Base : %d\n",pPulsadis->IndexBase);
-	printf("Index heure Creuse : %d\n",pPulsadis->IndexHeureCreuse);
-	printf("Index Heure Pleine : %d\n",pPulsadis->IndexHeurePleine);
-	printf("Index EJP Creuse : %d \n",pPulsadis->IndexEjpCreuse);
-	printf("Index EJP Pleine : %d \n",pPulsadis->IndexEjpPleine);
-	printf("Index Gaz : %d\n",pPulsadis->IndexGaz);
-	printf("Index Autre : %d\n",pPulsadis->IndexAutre);
-	printf("Index Bleu Creuse : %d\n",pPulsadis->IndexBleuCreuse);
-	printf("Index Bleu Pleine : %d\n",pPulsadis->IndexBleuPleine);
-	printf("Index Blanc Creuse : %d\n",pPulsadis->IndexBlancCreuse);
-	printf("Index Blanc Pleine : %d\n",pPulsadis->IndexBlancPleine);
-	printf("Index Rouge Creuse : %d\n",pPulsadis->IndexRougeCreuse);
-	printf("Index Rouge Pleine : %d\n",pPulsadis->IndexRougePleine);
-	printf("Preavis EJP : %d\n", pPulsadis->PreavisEjp);
-	printf("Periode tarifaire : ");
 	switch(pPulsadis->periode)
 	{
 	case ToutesHeures:
-		printf("Toutes heures\n");
+		strcpy(szPeriodeTarifaire,"Toutes heures");
 		break;
 	case HeureCreuse:
-		printf("Heures Creuses\n");
+		strcpy(szPeriodeTarifaire,"Heures Creuses");
 		break;
 	case HeurePleine:
-		printf("Heures Pleines\n");
+		strcpy(szPeriodeTarifaire,"Heures Pleines");
 		break;
 	case HeureNormale:
-		printf("Heures Normales\n");
+		strcpy(szPeriodeTarifaire,"Heures Normales");
 		break;
 	case JourDePointeMobile:
-		printf("Effacement Jour de pointe\n");
+		strcpy(szPeriodeTarifaire,"Effacement Jour de pointe");
 		break;
 	case HeureCreuseJourBleu:
-		printf("Bleu Creuse\n");
+		strcpy(szPeriodeTarifaire,"Heures Creuses Jours Bleus");
 		break;
 	case HeurePleineJourBleu:
-		printf("Bleu Pleine\n");
+		strcpy(szPeriodeTarifaire,"Heures Pleines Jours Bleus");
 		break;
 	case HeureCreuseJourBlanc:
-		printf("Blanc Creuse\n");
+		strcpy(szPeriodeTarifaire,"Heures Creuses Jours Blancs");
 		break;
 	case HeurePleineJourBlanc:
-		printf("Blanc Pleine\n");
+		strcpy(szPeriodeTarifaire,"Heures Pleines Jours Blancs");
 		break;
 	case HeureCreuseJourRouge:
-		printf("Rouge Creuse\n");
+		strcpy(szPeriodeTarifaire,"Heures Creuses Jours Rouges");
 		break;
 	case HeurePleineJourRouge:
-		printf("Rouge Pleine\n");
+		strcpy(szPeriodeTarifaire,"Heures Pleines Jours Rouges");
 		break;
+	default:
+		strcpy(szPeriodeTarifaire,"Inconnu");
 	}
-	printf("Couleur de demain :");
 	switch(pPulsadis->demain)
 	{
 	case Inconnu:
-		printf("Inconnu\n");
+		strcpy(szDemain,"Inconnu");
 		break;
 	case Bleu:
-		printf("Bleu\n");
+		strcpy(szDemain,"Bleu");
 		break;
 	case Blanc:
-		printf("Blanc\n");
+		strcpy(szDemain,"Blanc");
 		break;
 	case Rouge:
-		printf("Rouge\n");
+		strcpy(szDemain,"Rouge");
 		break;
 	}
-	printf("Intensite instantanee : %d\n",pPulsadis->Instantanee);
-	printf("Depassement : %d\n",pPulsadis->Depassement);
-	printf("Intensite maximale : %d\n",pPulsadis->IntensiteMaximale);
-	printf("Puissance apparente : %d\n",pPulsadis->PuissanceApparente);
-	printf("Mot d'etat : %s\n",pPulsadis->MotDetat);
+
+	printf("[ADCO:%s,OPTARIF:%s,ISOUSC:%d,BASE:%d,HCHC:%d,HCHP:%d,EJPHN:%d,EJPHPM:%d,GAZ:%d,AUTRE:%d,BBRHCJB:%d,BBRHPJB:%d,BBRHCJW::%d,BBRHPJW:%d,BBRHCJR:%d,BBRHPJR:%d,PEJP:%d,PTEC:%s,DEMAIN:%s,IINST:%d,ADPS:%d,IMAX:%d,PAPP:%d,MOTDETAT:%s]\n",
+			pPulsadis->Adco,szOPtTarif,pPulsadis->IntensiteSouscrite
+			,pPulsadis->IndexBase,pPulsadis->IndexHeureCreuse,pPulsadis->IndexHeurePleine
+			,pPulsadis->IndexEjpCreuse,pPulsadis->IndexEjpPleine,pPulsadis->IndexGaz,pPulsadis->IndexAutre
+			,pPulsadis->IndexBleuCreuse,pPulsadis->IndexBleuPleine,pPulsadis->IndexBlancCreuse,pPulsadis->IndexBlancPleine
+			,pPulsadis->IndexRougeCreuse,pPulsadis->IndexRougePleine, pPulsadis->PreavisEjp
+			,szPeriodeTarifaire,szDemain,pPulsadis->Instantanee,pPulsadis->Depassement,pPulsadis->IntensiteMaximale
+			,pPulsadis->PuissanceApparente,pPulsadis->MotDetat
+			);
+
 	close(mem);
 	return 0;
 }

@@ -104,7 +104,7 @@ int main(int argc, char * argv[])
 		break;
 	}
 
-	printf("[ADCO:%s,OPTARIF:%s,ISOUSC:%d,BASE:%d,HCHC:%d,HCHP:%d,EJPHN:%d,EJPHPM:%d,GAZ:%d,AUTRE:%d,BBRHCJB:%d,BBRHPJB:%d,BBRHCJW::%d,BBRHPJW:%d,BBRHCJR:%d,BBRHPJR:%d,PEJP:%d,PTEC:%s,DEMAIN:%s,IINST:%d,ADPS:%d,IMAX:%d,PAPP:%d,MOTDETAT:%s]\n",
+	printf("{\"ADCO\":\"%s\",\"OPTARIF\":\"%s\",\"ISOUSC\":%d,\"BASE\":%d,\"HCHC\":%d,\"HCHP\":%d,\"EJPHN\":%d,\"EJPHPM\":%d,\"GAZ\":%d,\"AUTRE\":%d,\"BBRHCJB\":%d,\"BBRHPJB\":%d,\"BBRHCJW\":%d,\"BBRHPJW\":%d,\"BBRHCJR\":%d,\"BBRHPJR\":%d,\"PEJP\":%d,\"PTEC\":\"%s\",\"DEMAIN\":\"%s\",\"IINST\":%d,\"ADPS\":%d,\"IMAX\":%d,\"PAPP\":%d,\"MOTDETAT\":\"%s\"}\n",
 			pPulsadis->Adco,szOPtTarif,pPulsadis->IntensiteSouscrite
 			,pPulsadis->IndexBase,pPulsadis->IndexHeureCreuse,pPulsadis->IndexHeurePleine
 			,pPulsadis->IndexEjpCreuse,pPulsadis->IndexEjpPleine,pPulsadis->IndexGaz,pPulsadis->IndexAutre
